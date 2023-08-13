@@ -1,0 +1,22 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+{% if current_user.is_authenticated %}
+<h3>Welcome {{ current_user.username }}</h3>
+{% else %}
+<h3>Welcome, Guest</h3>
+{% endif %}
+
+<section class="p-5 vh-100">
+    <h3>Welcome, Guest</h3>
+
+    <p>Sign up if you haven't yet.</p>
+
+    <p>And here's my pup watching me work on this app.</p>
+    <div class="container-fluid">
+        <img src="./app/static/img/messages_0.jpeg" class="img-fluid rounded mx-auto d-block my-5" alt="Caspian">
+    </div>
+</section>
+
+{% endblock %}

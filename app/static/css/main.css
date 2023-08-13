@@ -1,0 +1,42 @@
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+section {
+    background-color: #ebfff5;
+}
+
+.nav-link {
+    margin-right: 10px;
+}
+
+.nav-item {
+    font-size: .9em;
+}
+
+
+.btn {
+    border-radius: 50px;
+}
+
+
+
+
+/* 
+
+Color schemes:
+Brand title font: rgb(0, 122, 49) # for brand logo
+Brand background blob: d6fffe 
+
+Overview icon:
+Sheet - #007a31 (same as logo)
+Eye - #43ccd6
+Lines - #6714ff
+Thickness 5%
+size 200px
+
+Transactions icon duotone:
+Main - #007d31
+Secondary - #33bbff / #007ab8
+
+*/
