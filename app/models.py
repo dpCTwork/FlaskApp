@@ -58,10 +58,10 @@ class Transactions(db.Model):
     merchant = db.Column(db.String(250))
     card = db.Column(db.String(250))
     purchase_type = db.Column(db.String(250))
+    amount = db.Column(db.Numeric(6, 2))
     
     # Will save the below columns once we get to the frontend portion of the app with JavaScript and React
     # purchase_date = db.Column(db.Date)
-    # amount = db.Column(db.Numeric(6, 2))
     # timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
