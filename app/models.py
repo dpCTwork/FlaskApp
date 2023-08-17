@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from secrets import token_urlsafe
+from datetime import datetime, date
 
 from app import db, login
 
@@ -57,9 +58,11 @@ class Transactions(db.Model):
     merchant = db.Column(db.String(250))
     card = db.Column(db.String(250))
     purchase_type = db.Column(db.String(250))
-    amount = db.Column(db.Numeric(6, 2))
-    date = db.Column(db.DateTime)
     
+    # Will save the below columns once we get to the frontend portion of the app with JavaScript and React
+    # purchase_date = db.Column(db.Date)
+    # amount = db.Column(db.Numeric(6, 2))
+    # timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f'Post: {self.body}'
