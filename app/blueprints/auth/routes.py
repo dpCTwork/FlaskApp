@@ -3,14 +3,14 @@ from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
 
 from . import bp
-from app.forms import RegisterForm, LoginForm
+from app.forms import SignupForm, LoginForm
 
-@bp.route('/register', methods=['GET', 'POST'])
+@bp.route('/signup', methods=['GET', 'POST'])
 # By default, the route decorate only allows 'GET' requests. So we have to add 'POST' to the list of methods.
-def register():
+def signup():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    form = RegisterForm()
+    form = SignupForm()
     if form.validate_on_submit():
         # We will add the database code here later
         # For now, we'll just flash a message with flash()
@@ -27,7 +27,7 @@ def register():
             flash(f'Username {username} already exists. Please choose another username.', 'warning')
         elif email:
             flash(f'Email {form.email.data} already exists. Please choose another email.', 'warning')
-    return render_template('register.j2', title='Register', form=form)
+    return render_template('/auth_templates/signup.j2', title='Sign Up', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

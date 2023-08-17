@@ -9,18 +9,17 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 class User(UserMixin, db.Model):
-    # This is the User table. We are creating a table called 'User' with the following columns:
+    # User table for this app will have the following columns:
     # user_id, username, email, and password
     # The user_id is the primary key, which means it is the unique identifier for each user
-    # First you pass in the datatype, then state whether it's a primary key or not. Default is False.
     user_id = db.Column(db.Integer, primary_key=True)
-    # We'll also set the username and email to be unique.
+    # Set the username and email to be unique.
     # The unique=True means that the username/email must be unique. No two users can have the same username/email.
     username = db.Column(db.String(60), unique=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
     token = db.Column(db.String(250), unique=True)
-    transactions = db.relationship('Post', backref='author', lazy=True)
+    transactions = db.relationship('Transactions', backref='user', lazy=True)
 
     def __repr__(self):
         # This is the string representation of the User object.
@@ -45,23 +44,21 @@ class User(UserMixin, db.Model):
         # This method will add a token to the database
         # We will call this method in our routes.py file.
         
-        # Dylan's code
         setattr(self, 'token', token_urlsafe(32))
-        
-        # GitHub CoPilot suggested this code:
-        # self.token = self.generate_token()
-        # self.commit()
 
 
     def get_id(self):
         return str(self.user_id)
         
     
-class Post(db.Model):
+class Transactions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     merchant = db.Column(db.String(250))
-    amount = db.Column(db.Integer)
+    card = db.Column(db.String(250))
+    purchase_type = db.Column(db.String(250))
+    amount = db.Column(db.Numeric(6, 2))
+    date = db.Column(db.DateTime)
     
 
     def __repr__(self):

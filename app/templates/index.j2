@@ -2,20 +2,23 @@
 
 {% block content %}
 
-{% if current_user.is_authenticated %}
-<h3>Welcome {{ current_user.username }}</h3>
-{% else %}
-<h3>Welcome, Guest</h3>
-{% endif %}
+{# 
+    Maybe change this page to be a landing page for contacting me or learning more about me.
+    Or maybe an about page for this app with a contact form and links to my socials and github.
+ #}
 
 <section class="p-5 vh-100">
+    {% if current_user.is_authenticated %}
+    <h3>Welcome {{ current_user.username }}</h3>
+    {% else %}
     <h3>Welcome, Guest</h3>
+    {% endif %}
 
-    <p>Sign up if you haven't yet.</p>
+    <p><button type="button" class="btn btn-success btn-rounded mx-1">Sign Up</button> for a new account if you haven't yet.</p>
 
     <p>And here's my pup watching me work on this app.</p>
     <div class="container-fluid">
-        <img src="./app/static/img/messages_0.jpeg" class="img-fluid rounded mx-auto d-block my-5" alt="Caspian">
+        <img src="{{ url_for('static', filename='img/messages_0.jpeg') }}" class="img-fluid rounded mx-auto d-block my-5" alt="Caspian"/>
     </div>
 </section>
 
