@@ -1,0 +1,27 @@
+{% extends "base.j2" %}
+
+{% block content %}
+<section class="row">
+<h3>{{ user.first_name }} {{ user.last_name }}'s Transactions</h3>
+<div class="col-sm-12 col-md-7 col-lg-4 p-5 vh-100 mx-auto">
+
+{% for item in user.transactions %}
+<div class="transactions">
+    <p>
+        {{ transactions.id }}<br>
+        {{ transactions.merchant }}<br>
+        {{ transactions.card }}<br>
+        {{ transactions.purchase_type }}<br>
+        {{ transactions.purchase_date }}<br>
+        {{ transactions.amount }}<br>
+        <small>Recorded on: {{ transactions.timestamp }}</small>
+    </p>
+</div>
+{% endfor %}
+
+
+
+</div>
+</section>
+
+{% endblock %}

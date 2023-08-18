@@ -1,0 +1,60 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+<section class="row"> 
+<div class="col-sm-12 col-md-7 col-lg-4 p-5 vh-100 mx-auto">
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    
+    <p>
+        {{ form.merchant.label(class="form-label") }}<br>
+        {{ form.merchant(class="form-control") }}<br>
+        {% for error in form.merchant.errors %}
+        <span class="err-msg">{{ error }}</span>
+        {% endfor %}
+    </p>
+    
+    <p>
+        {{ form.card.label(class="form-label") }}<br>
+        {{ form.card(class="form-select") }}<br>
+        {% for error in form.card.errors %}
+        <span class="err-msg">{{ error }}</span>
+        {% endfor %}
+    </p>
+    <p class="">
+        {{ form.purchase_type.label(class="form-label") }}<br>
+        {{ form.purchase_type(class="form-select") }}<br>
+        {% for error in form.purchase_type.errors %}
+        <span class="err-msg">{{ error }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.purchase_date.label(class="form-label") }}<br>
+        {{ form.purchase_date(class="form-control", type="date") }}<br>
+        {% for error in form.purchase_date.errors %}
+        <span class="err-msg">{{ error }}</span>
+        {% endfor %}
+    </p>
+    <p style="margin-bottom: 0;">
+        {{ form.amount.label(class="form-label") }}
+
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            {{ form.amount(class="form-control", type="text") }}
+        </div>
+    {% for error in form.amount.errors %}
+    <span class="err-msg">{{ error }}</span>
+    {% endfor %}
+    </p>
+
+    <div>
+    {{ form.submit(class="btn btn-success mt-5", style="border-radius: 5px") }}
+    </div>
+</form>
+</div>
+</section>
+
+{% endblock %}
+

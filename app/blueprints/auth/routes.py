@@ -9,7 +9,7 @@ from app.forms import SignupForm, LoginForm
 # By default, the route decorate only allows 'GET' requests. So we have to add 'POST' to the list of methods.
 def signup():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.budget_form'))
     form = SignupForm()
     if form.validate_on_submit():
         # We will add the database code here later
@@ -17,12 +17,12 @@ def signup():
         username = User.query.filter_by(username=form.username.data).first()
         email = User.query.filter_by(email=form.email.data).first()
         if not email and not username:
-            u = User(username=form.username.data, email=form.email.data, password=form.password.data)
+            u = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=form.password.data)
             u.password = u.hash_password(form.password.data)
             u.add_token()
             u.commit()
             flash(f'Account created for {form.username.data}! You can now log in.', 'success')
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.budget_form'))
         if username:
             flash(f'Username {username} already exists. Please choose another username.', 'warning')
         elif email:
@@ -32,17 +32,17 @@ def signup():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.budget_form'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
             flash(f"Welcome, {form.username.data}!", 'success')
             login_user(user)
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.budget_form'))
         else:
             flash(f"User {form.username.data} doesn't exist or the password is incorrect.", 'danger')
-    return render_template('login.j2', title='Log In', form=form)
+    return render_template('/auth_templates/login.j2', title='Log In', form=form)
 
 @bp.route('/logout')
 @login_required

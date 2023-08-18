@@ -1,5 +1,6 @@
 body {
     font-family: 'Raleway', sans-serif;
+    background-color: #ebfff5;
 }
 
 section {
@@ -19,7 +20,6 @@ section {
 .btn {
     border-radius: 50px;
 }
-
 
 
 

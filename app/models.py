@@ -16,6 +16,8 @@ class User(UserMixin, db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     # Set the username and email to be unique.
     # The unique=True means that the username/email must be unique. No two users can have the same username/email.
+    first_name = db.Column(db.String(60))
+    last_name = db.Column(db.String(60))
     username = db.Column(db.String(60), unique=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
@@ -58,14 +60,12 @@ class Transactions(db.Model):
     merchant = db.Column(db.String(250))
     card = db.Column(db.String(250))
     purchase_type = db.Column(db.String(250))
+    purchase_date = db.Column(db.Date)
     amount = db.Column(db.Numeric(6, 2))
-    
-    # Will save the below columns once we get to the frontend portion of the app with JavaScript and React
-    # purchase_date = db.Column(db.Date)
-    # timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'Post: {self.body}'
+        return f'Transaction: A {self.card} purchase of ${self.amount} at {self.merchant} on {self.purchase_date} has been added.'
     
     def commit(self):
         db.session.add(self)

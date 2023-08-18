@@ -16,6 +16,8 @@
 </head>
 <body>
     
+    {% include "./components/navbar.j2" %}
+
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <ul style="list-style: none;">
@@ -30,10 +32,8 @@
     {% endwith %} 
    
     
-{% include "./components/navbar.j2" %}
-    
 {% block content %}
-<p>test</p>
+
  
 {% endblock %}
 

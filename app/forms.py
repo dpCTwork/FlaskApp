@@ -4,6 +4,8 @@ from wtforms.validators import DataRequired, Email
 
 
 class SignupForm(FlaskForm):
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -15,11 +17,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 class TransactionForm(FlaskForm):
-    merchant = StringField('Merchant', validators=[DataRequired()])
-    card = SelectField('Card', choices=['Visa', 'Mastercard', 'American Express', 'Discover'], validators=[DataRequired()])
-    purchase_type = RadioField('Purchase Type', choices=['Dining', 'Gas', 'Grocery', 'Entertainment'], validators=[DataRequired()])
-    amount = DecimalField('Amount', validators=[DataRequired()])
-    enter = SubmitField('Enter Transaction')
+    merchant = StringField('Merchant', validators=[DataRequired()], render_kw={'placeholder': 'e.g. Starbucks'})
+    card = SelectField('Card', choices=['Visa', 'Mastercard', 'American Express'], validators=[DataRequired()])
+    purchase_type = SelectField('Purchase Type', choices=[('dining', 'Dining'), ('gas', 'Gas'), ('grocery', 'Grocery'), ('entertainment', 'Entertainment')], validators=[DataRequired()])
+    purchase_date = DateField('Date of Transaction', validators=[DataRequired()])
+    amount = DecimalField('Transaction Amount', validators=[DataRequired()], render_kw={'placeholder': '0.00'})
+    submit = SubmitField('Enter')
 
     
 
