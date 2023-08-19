@@ -2,24 +2,52 @@
 
 {% block content %}
 <section class="row">
-<h3>{{ user.first_name }} {{ user.last_name }}'s Transactions</h3>
-<div class="col-sm-12 col-md-7 col-lg-4 p-5 vh-100 mx-auto">
+<div class="col-sm-12 col-md-10 col-lg-10 p-5 vh-100 mx-auto">
 
-{% for item in user.transactions %}
-<div class="transactions">
-    <p>
-        {{ transactions.id }}<br>
-        {{ transactions.merchant }}<br>
-        {{ transactions.card }}<br>
-        {{ transactions.purchase_type }}<br>
-        {{ transactions.purchase_date }}<br>
-        {{ transactions.amount }}<br>
-        <small>Recorded on: {{ transactions.timestamp }}</small>
-    </p>
+<div class="mx-auto my-5 text-center">
+<h3>{{ user.first_name.title() }} {{ user.last_name.title() }}'s transactions</h3>
 </div>
-{% endfor %}
 
+<div class="container justify-content-center m-auto">
+<table class="table table-responsive table-success table-striped table-bordered border-success">
+    <thead>
+        <tr class="table-success border-success">
+            <th scope="col">#</th>
+            <th scope="col">Merchance</th>
+            <th scope="col">Card Type</th>
+            <th scope="col">Category</th>
+            <th scope="col">Date of Transaction</th>
+            <th scope="col">Amount ($)</th>
+            <th scope="col">Recorded Timestamp</th>
+        </tr>
+    </thead>
+    <tbody class="table-light table-group-divider border-success">
+    {% for item in user.transactions %}
+        <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.merchant }}</td>
+            <td>{{ item.card }}</td>
+            <td>{{ item.purchase_type }}</td>
+            <td>{{ item.purchase_date }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.timestamp }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
 
+{# <div class="transactions">
+    <p>
+        {{ item.id }}<br>
+        {{ item.merchant }}<br>
+        {{ item.card }}<br>
+        {{ item.purchase_type }}<br>
+        {{ item.purchase_date }}<br>
+        {{ item.amount }}<br>
+        <small>Recorded on: {{ item.timestamp }}</small>
+    </p>
+</div> #}
 
 </div>
 </section>

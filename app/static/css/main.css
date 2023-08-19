@@ -21,6 +21,17 @@ section {
     border-radius: 50px;
 }
 
+th {
+    vertical-align: middle;
+    text-align: center;
+    padding: 20px 5px 20px 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #007a31;
+    font-weight: bold;
+}
 
 
 /* 

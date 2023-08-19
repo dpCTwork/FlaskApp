@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, RadioField, SelectField, DateField, DecimalField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, DecimalField
 from wtforms.validators import DataRequired, Email
 
 
@@ -21,7 +21,7 @@ class TransactionForm(FlaskForm):
     card = SelectField('Card', choices=['Visa', 'Mastercard', 'American Express'], validators=[DataRequired()])
     purchase_type = SelectField('Purchase Type', choices=[('dining', 'Dining'), ('gas', 'Gas'), ('grocery', 'Grocery'), ('entertainment', 'Entertainment')], validators=[DataRequired()])
     purchase_date = DateField('Date of Transaction', validators=[DataRequired()])
-    amount = DecimalField('Transaction Amount', validators=[DataRequired()], render_kw={'placeholder': '0.00'})
+    amount = DecimalField('Transaction Amount', places=2, validators=[DataRequired()], render_kw={'placeholder': '0.00'})
     submit = SubmitField('Enter')
 
     

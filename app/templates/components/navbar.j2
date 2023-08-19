@@ -13,26 +13,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="#profile" class="nav-link"><img width="20" height="20"
-                            src="{{ url_for('static', filename='img/navbar-icons/user-1.svg') }}" alt="user-default" 
-                            style="margin-right: 10px;">Profile</a>
-                </li>
+                {# <li class="nav-item"> #}
+                    {# <a href="#profile" class="nav-link"><img width="20" height="20" #}
+                            {# src="{{ url_for('static', filename='img/navbar-icons/user-1.svg') }}" alt="user-default"  #}
+                            {# style="margin-right: 10px;">Profile</a> #}
+                {# </li> #}
                 <li class="nav-item">
                     <a href="{{ url_for('main.transactions') }}" class="nav-link"><img width="20" height="20"
                             src="{{ url_for('static', filename='img/navbar-icons/picture-2.svg') }}" alt="overview"
-                            style="margin-right: 10px;">Overview</a>
+                            style="margin-right: 10px;">All Transactions</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url_for('main.budget_form') }}" class="nav-link"><img width="20" height="20"
                             src="{{ url_for('static', filename='img/navbar-icons/menu-1.svg') }}" alt="transactions"
-                            style="margin-right: 10px;">Transactions</a>
+                            style="margin-right: 10px;">Budget Form</a>
                 </li>
-                <li class="nav-item">
+                {# <li class="nav-item">
                     <a href="#settings" class="nav-link"><img width="20" height="20"
                             src="{{ url_for('static', filename='img/navbar-icons/settings-2.svg') }}" alt="settings" 
                             style="margin-right: 10px;">Settings</a>
-                </li>
+                </li> #}
                 <li class="nav-item">
                     <a href="{{ url_for('auth.logout')}}" class="nav-link"><img width="20" height="20" 
                     src="{{ url_for('static', filename='img/navbar-icons/quit-1.svg') }}" alt="log out" style="margin-right: 10px;">Log Out</a>
@@ -44,11 +44,11 @@
 {% else %}
     <div>
         <a href="{{ url_for('auth.login') }}">
-            <button type="button" class="btn btn-outline-success btn-lg btn-rounded mx-1 p-1">Log In</button>
+            <button type="button" class="btn btn-outline-success btn-lg btn-rounded mx-1 px-3">Log In</button>
         </a>
         <span class="m-2"></span>
         <a href="{{ url_for('auth.signup') }}">
-            <button type="button" class="btn btn-success btn-lg btn-rounded mx-1 p-1">Sign Up</button>
+            <button type="button" class="btn btn-success btn-lg btn-rounded mx-1 px-3">Sign Up</button>
         </a>
     </div>
 </nav>

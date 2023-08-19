@@ -17,6 +17,7 @@ def budget_form():
     form = TransactionForm()
     if form.validate_on_submit():
         t = Transactions(merchant=form.merchant.data, card=form.card.data, purchase_type=form.purchase_type.data, purchase_date=form.purchase_date.data, amount=form.amount.data)
+        t.user_id = current_user.user_id
         t.commit()
         flash(f'Transaction added for {form.merchant.data}!', 'success')
         return redirect(url_for('main.budget_form', username=current_user.username))

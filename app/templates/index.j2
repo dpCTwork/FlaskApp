@@ -9,17 +9,18 @@
 
 <section class="p-5 vh-100">
     {% if current_user.is_authenticated %}
-    <h3>Welcome {{ current_user.username }}</h3>
+    <h3 class="mx-5 my-3">Welcome {{ current_user.username }}</h3>
     {% else %}
-    <h3>Welcome, Guest</h3>
+    <h3 class="mx-5 my-3">Welcome, Guest</h3>
     {% endif %}
-
-    <p><button type="button" class="btn btn-success btn-rounded mx-1">Sign Up</button> for a new account if you haven't yet.</p>
+<div class="container-fluid m-5 fs-5">
+    <p><a href="#">Sign Up</a> for a new account if you haven't yet.</p>
 
     <p>And here's my pup watching me work on this app.</p>
     <div class="container-fluid">
         <img src="{{ url_for('static', filename='img/messages_0.jpeg') }}" class="img-fluid rounded mx-auto d-block my-5" alt="Caspian"/>
     </div>
+</div>
 </section>
 
 {% endblock %}
