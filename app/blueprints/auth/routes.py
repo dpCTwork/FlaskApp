@@ -22,12 +22,12 @@ def signup():
             u.add_token()
             u.commit()
             flash(f'Account created for {form.username.data}! You can now log in.', 'success')
-            return redirect(url_for('main.budget_form'))
+            return redirect(url_for('auth.login'))
         if username:
             flash(f'Username {username} already exists. Please choose another username.', 'warning')
         elif email:
             flash(f'Email {form.email.data} already exists. Please choose another email.', 'warning')
-    return render_template('/auth_templates/signup.j2', title='Sign Up', form=form)
+    return render_template('/auth/signup.j2', title='Sign Up', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,7 +42,7 @@ def login():
             return redirect(url_for('main.budget_form'))
         else:
             flash(f"User {form.username.data} doesn't exist or the password is incorrect.", 'danger')
-    return render_template('/auth_templates/login.j2', title='Log In', form=form)
+    return render_template('/auth/login.j2', title='Log In', form=form)
 
 @bp.route('/logout')
 @login_required
