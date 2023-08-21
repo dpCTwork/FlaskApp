@@ -20,7 +20,7 @@ def signup():
             u = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=form.password.data)
             u.password = u.hash_password(form.password.data)
             u.add_token()
-            u.commit()
+            u.add()
             flash(f'Account created for {form.username.data}! You can now log in.', 'success')
             return redirect(url_for('auth.login'))
         if username:

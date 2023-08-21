@@ -5,8 +5,9 @@ from app.models import Transactions, User
 from .helpers import token_required
 
 
+
 # Get all transactions from all users
-@api.route('/transactions/', methods=['GET'])
+@api.route('/transactions/get', methods=['GET'])
 @token_required
 def api_transactions(user):
     result = []
@@ -25,8 +26,8 @@ def api_transactions(user):
         })
     return jsonify(result), 200
 
-# Get a single transaction from across all users in database
-@api.get('/transactions/<transaction_id>')
+# Get a single transaction from across all transactions in database
+@api.get('/transactions/get/<transaction_id>')
 @token_required
 def api_transaction(user, transaction_id):
     transaction = Transactions.query.filter_by(id=transaction_id).first()
@@ -45,7 +46,7 @@ def api_transaction(user, transaction_id):
     return jsonify({'message': 'Transaction not found.'}), 404
 
 # Get all transactions from a specific user
-@api.get('/transactions/<username>')
+@api.get('/transactions/get/users/<username>')
 @token_required
 def api_user_transactions(user, username):
     user = User.query.filter_by(username=username).first()
@@ -53,7 +54,7 @@ def api_user_transactions(user, username):
         return jsonify([{
             'id': transaction.id,
             'user_id': transaction.user_id,
-            'user': transaction.user.username,
+            'username': transaction.user.username,
             'merchant': transaction.merchant, 
             'card': transaction.card,
             'purchase_type': transaction.purchase_type,
@@ -64,7 +65,7 @@ def api_user_transactions(user, username):
     return jsonify({'message': 'User not found.'}), 404
 
 # Get a single transaction from a specific user
-@api.get('/transactions/<username>/<transaction_id>')
+@api.get('/transactions/get/users/<username>/<transaction_id>')
 @token_required
 def api_user_transaction(user, username, transaction_id):
     user = User.query.filter_by(username=username).first()
@@ -87,7 +88,7 @@ def api_user_transaction(user, username, transaction_id):
 
     
 # Add a new transaction 
-@api.post('/transaction')
+@api.post('/transactions/add')
 @token_required
 def api_add_transaction(user):
     # Receive their post data
@@ -96,6 +97,7 @@ def api_add_transaction(user):
     # Create a transaction instance
     # Add foreign key to user_id
     transaction = Transactions(
+        user_id=user.user_id,
         merchant=content['merchant'],
         card=content['card'],
         purchase_type=content['purchase_type'],
@@ -103,24 +105,13 @@ def api_add_transaction(user):
         amount=content['amount'],
     )
     
-    transaction.commit()
+    transaction.add()
     return jsonify({'message': f'Transaction added!'}), 201
 
-# Delete a transaction from a specific user
-
-@api.delete('/transactions/<transaction_id>')
+# Update a transaction by ID
+@api.put('/transactions/update/<transaction_id>')
 @token_required
-def api_delete_transaction(current_user, transaction_id):
-    transaction = Transactions.query.filter_by(id=transaction_id).first()
-    if transaction:
-        transaction.delete()
-        return jsonify({'message': f'Transaction deleted for {current_user.username}!'}), 200
-    return jsonify({'message': 'Transaction not found.'}), 404
-
-# Update a transaction from a specific user
-@api.route('/transactions/<transaction_id>', methods=['POST', 'PUT'])
-@token_required
-def api_update_transaction(current_user, transaction_id):
+def api_update_transaction(user, transaction_id):
     transaction = Transactions.query.filter_by(id=transaction_id).first()
     if transaction:
         try:
@@ -130,8 +121,20 @@ def api_update_transaction(current_user, transaction_id):
             transaction.purchase_type = transaction_info['purchase_type']
             transaction.purchase_date = transaction_info['purchase_date']
             transaction.amount = transaction_info['amount']
-            transaction.commit()
-            return jsonify({'message': f'Transaction successfully updated for {current_user.first_name.title()} {current_user.last_name.title()}!'}), 200
+            transaction.add()
+            return jsonify({'message': f'Transaction successfully updated for {user.first_name.title()} {user.last_name.title()}!'}), 200
         except:
             return jsonify({'message': 'Invalid entry. Transaction not updated.'}), 400
     return jsonify({'message': 'Transaction not found.'}), 404
+
+# Delete a transaction from database by transaction ID
+@api.delete('/transactions/delete/<transaction_id>')
+@token_required
+def api_delete_transaction(user, transaction_id):
+    transaction = Transactions.query.filter_by(id=transaction_id).first()
+    if transaction:
+        transaction.delete()
+        return jsonify({'message': f'Transaction deleted!'}), 200
+    return jsonify({'message': 'Transaction not found.'}), 404
+
+

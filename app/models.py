@@ -29,10 +29,14 @@ class User(UserMixin, db.Model):
         # This is what will be returned when we query the database for a User object.
         return f'User: {self.username}'
     
-    def commit(self):
-        # This is a method that commits the User object to the database.
-        # We will call this method in our routes.py file.
+    def add(self):
+        # Method to add User object to the database.
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        # Method to delete user from the database
+        db.session.delete(self)
         db.session.commit()
 
     def hash_password(self, password):
@@ -67,6 +71,12 @@ class Transactions(db.Model):
     def __repr__(self):
         return f'Transaction: A {self.card} purchase of ${self.amount} at {self.merchant} on {self.purchase_date} has been added.'
     
-    def commit(self):
+    def add(self):
+        # Method to add Transaction object to the database
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        # Method to delete Transaction object from the database
+        db.session.delete(self)
         db.session.commit()
