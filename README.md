@@ -1,4 +1,4 @@
-# ![Fludget image](https://github.com/dpCTwork/FlaskApp/blob/main/app/static/img/savings-svgrepo-com.svg width=20 "Fludget") Fludget, the Flask Budget App
+# <img src="https://github.com/dpCTwork/FlaskApp/assets/128423686/70b980d5-e222-46e4-8dc2-f46a38c4df20" width="40" height="40"> Flask Budget App
 
 ### About 
 
