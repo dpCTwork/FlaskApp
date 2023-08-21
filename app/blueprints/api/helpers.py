@@ -12,7 +12,7 @@ def token_required(flask_route):
                 token = request.headers['x-access-token'].split()[1]
                 user = User.query.filter_by(token=token).first()
                 if user:
-                    return flask_route(*args, **kwargs)
+                    return flask_route(user, *args, **kwargs)
                 return jsonify({'message': 'Invalid token!'}), 401
             except:
                 return jsonify({'message': 'Invalid token!'}), 401

@@ -6,7 +6,7 @@ from .helpers import token_required
 
 
 # Get all transactions from all users
-@api.route('/transactions', methods=['GET'])
+@api.route('/transactions/', methods=['GET'])
 @token_required
 def api_transactions(user):
     result = []
@@ -85,23 +85,26 @@ def api_user_transaction(user, username, transaction_id):
         return jsonify({'message': 'Transaction not found.'}), 404
     return jsonify({'message': 'User not found.'}), 404
 
-# Add a new transaction for a specific user
-
-@api.post('/transactions/')
+    
+# Add a new transaction 
+@api.post('/transaction')
 @token_required
-def api_add_transaction(current_user):
-    try:
-        transaction_info = request.get_json()
-        merchant = transaction_info['merchant']
-        card = transaction_info['card']
-        purchase_type = transaction_info['purchase_type']
-        purchase_date = transaction_info['purchase_date']
-        amount = transaction_info['amount']
-        transaction = Transactions(merchant=merchant, card=card, purchase_type=purchase_type, purchase_date=purchase_date, amount=amount, user_id=current_user.user_id)
-        transaction.commit()
-        return jsonify({'message': f'Transaction added for {current_user.username}!'}), 201
-    except:
-        return jsonify({'message': 'Invalid entry. Transaction not added.'}), 400
+def api_add_transaction(user):
+    # Receive their post data
+    content = request.get_json()
+
+    # Create a transaction instance
+    # Add foreign key to user_id
+    transaction = Transactions(
+        merchant=content['merchant'],
+        card=content['card'],
+        purchase_type=content['purchase_type'],
+        purchase_date=content['purchase_date'],
+        amount=content['amount'],
+    )
+    
+    transaction.commit()
+    return jsonify({'message': f'Transaction added!'}), 201
 
 # Delete a transaction from a specific user
 
