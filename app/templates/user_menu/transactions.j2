@@ -24,7 +24,7 @@
     <tbody class="table-light table-group-divider border-success">
     {% for item in user.transactions %}
         <tr>
-            <th scope="row">{{ item.id }}</th>
+            <th scope="row">{{ loop.index }}</th>
             <td>{{ item.merchant }}</td>
             <td>{{ item.card }}</td>
             <td>{{ item.purchase_type }}</td>
