@@ -2,14 +2,14 @@
 
 ### About 
 
-This is a basic budgeting app using Flask. The app frontend was made using jinja and Bootstrap 5, while the backend was made using Flask-SQLAlchemy and connected to a PostgreSQL database. The frontend is currently minimal, and will be revamped using React.
+This is a basic budgeting app using Flask. The app frontend was made using jinja, Python, and Bootstrap 5, while the backend was made using Flask-SQLAlchemy and connected to a PostgreSQL database. The frontend is currently minimal, and will be revamped using React.
 
 By creating this app, I was able to gain experience in the following:
 
 - Modular programming using Flask and MVC architecture
 - Database connections and building using Flask-SQLAlchemy
 - PostgreSQL
-- Python programming (OOP, modules, etc.)
+- Flask Jinja templating and Python
 - REST API development and CRUD operations
 - API testing/debugging with Insomnia
 - HTML, CSS, and Bootstrap5
