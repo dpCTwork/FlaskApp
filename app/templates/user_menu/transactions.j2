@@ -1,41 +1,43 @@
 {% extends "base.j2" %}
 
 {% block content %}
-<section class="row">
-<div class="col-sm-12 col-md-10 col-lg-10 p-5 vh-100 mx-auto">
+<section class="p-5 vh-80 mb-5 mx-auto">
+
 
 <div class="mx-auto my-5 text-center">
 <h3>{{ user.first_name.title() }} {{ user.last_name.title() }}'s transactions</h3>
 </div>
 
-<div class="container justify-content-center m-auto">
-<table class="table table-responsive table-success table-striped table-bordered border-success">
-    <thead>
-        <tr class="table-success border-success">
-            <th scope="col">#</th>
-            <th scope="col">Merchants</th>
-            <th scope="col">Card Type</th>
-            <th scope="col">Category</th>
-            <th scope="col">Date of Transaction</th>
-            <th scope="col">Amount ($)</th>
-            <th scope="col">Recorded Timestamp</th>
-        </tr>
-    </thead>
-    <tbody class="table-light table-group-divider border-success">
-    {% for item in user.transactions %}
-        <tr>
-            <th scope="row">{{ loop.index }}</th>
-            <td>{{ item.merchant }}</td>
-            <td>{{ item.card }}</td>
-            <td>{{ item.purchase_type }}</td>
-            <td>{{ item.purchase_date }}</td>
-            <td>{{ item.amount }}</td>
-            <td>{{ item.timestamp }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+<div class="table-responsive">
+    <table class="container mx-auto justify-content-center m-auto table-success table-striped table-bordered border-success overflow-none">
+        <thead>
+            <tr class="table-success border-success">
+                <th scope="col">#</th>
+                <th scope="col">Merchants</th>
+                <th scope="col">Card Type</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date of Transaction</th>
+                <th scope="col">Amount ($)</th>
+                <th scope="col">Recorded Timestamp</th>
+            </tr>
+        </thead>
+        <tbody class="table-light table-group-divider border-success">
+        {% for item in user.transactions %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ item.merchant }}</td>
+                <td>{{ item.card }}</td>
+                <td>{{ item.purchase_type }}</td>
+                <td>{{ item.purchase_date }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.timestamp }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
+
 
 {# <div class="transactions">
     <p>
@@ -49,7 +51,7 @@
     </p>
 </div> #}
 
-</div>
+
 </section>
 
 {% endblock %}
