@@ -2,7 +2,9 @@
 
 ### About 
 
-This is a basic budgeting app using Flask. The app frontend was made using jinja, Python, and Bootstrap 5, while the backend was made using Flask-SQLAlchemy and connected to a PostgreSQL database. The frontend is currently minimal, and will be revamped using React.
+URL: https://fludget.onrender.com/
+
+This is a personal budgeting app using Flask. The app frontend was made using jinja, Python, and Bootstrap 5, while the backend was made using Flask-SQLAlchemy and connected to a PostgreSQL database hosted on a cloud PaaS, ElephantSQL. The frontend is currently minimal, and will be revamped using TypeScript, React.
 
 By creating this app, I was able to gain experience in the following:
 
